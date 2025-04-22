@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مود ابك</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo">MOD-APM</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث عن التطبيقات...">
+    </div>
+
+    <div class="app-grid" id="appContainer">
+      <!-- التطبيقات تظهر هنا -->
+    </div>
+
+    <div class="pagination" id="pagination">
+      <!-- أزرار الترقيم الصفحات تظهر هنا -->
+    </div>
+  </div>
+
+  <script>
+    // بيانات التطبيقات
+    const apps = [
+      {
+        title: "واتساب مود",
+        image: "https://via.placeholder.com/100/4CAF50/FFFFFF?text=WA",
+        link: "#",
+        category: "تواصل اجتماعي"
+      },
+      {
+        title: "يوتيوب بريميوم",
+        image: "https://via.placeholder.com/100/FF0000/FFFFFF?text=YT",
+        link: "#",
+        category: "فيديو"
+      },
+      {
+        title: "انستغرام مود",
+        image: "https://via.placeholder.com/100/E1306C/FFFFFF?text=IG",
+        link: "#",
+        category: "تواصل اجتماعي"
+      },
+      {
+        title: "تيك توك مود",
+        image: "https://via.placeholder.com/100/000000/FFFFFF?text=TT",
+        link: "#",
+        category: "فيديو"
+      },
+      {
+        title: "سبوتيفاي مود",
+        image: "https://via.placeholder.com/100/1DB954/FFFFFF?text=SP",
+        link: "#",
+        category: "موسيقى"
+      },
+      {
+        title: "سناب شات مود",
+        image: "https://via.placeholder.com/100/FFFC00/000000?text=SC",
+        link: "#",
+        category: "تواصل اجتماعي"
+      },
+      {
+        title: "تلجرام مود",
+        image: "https://via.placeholder.com/100/0088CC/FFFFFF?text=TG",
+        link: "#",
+        category: "مراسلة"
+      },
+      {
+        title: "فوتوشوب مود",
+        image: "https://via.placeholder.com/100/00C4FF/FFFFFF?text=PS",
+        link: "#",
+        category: "تصميم"
+      },
+      {
+        title: "نيتفليكس مود",
+        image: "https://via.placeholder.com/100/E50914/FFFFFF?text=NF",
+        link: "#",
+        category: "فيديو"
+      },
+      {
+        title: "تويتر مود",
+        image: "https://via.placeholder.com/100/1DA1F2/FFFFFF?text=TW",
+        link: "#",
+        category: "تواصل اجتماعي"
+      },
+      {
+        title: "فيسبوك مود",
+        image: "https://via.placeholder.com/100/1877F2/FFFFFF?text=FB",
+        link: "#",
+        category: "تواصل اجتماعي"
+      },
+      {
+        title: "بيكسارت مود",
+        image: "https://via.placeholder.com/100/00D564/FFFFFF?text=PX",
+        link: "#",
+        category: "تصميم"
+      },
+      {
+        title: "شاهد مود",
+        image: "https://via.placeholder.com/100/FF7800/FFFFFF?text=SH",
+        link: "#",
+        category: "فيديو"
+      },
+      {
+        title: "دي دي إس مود",
+        image: "https://via.placeholder.com/100/FF0000/FFFFFF?text=DS",
+        link: "#",
+        category: "أدوات"
+      }
+    ];
+
+    // انتظار تحميل DOM بالكامل
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById("appContainer");
+      const searchInput = document.getElementById("searchInput");
+      const pagination = document.getElementById("pagination");
+      
+      let currentPage = 1;
+      const appsPerPage = 10;
+
+      // عرض التطبيقات مع التقسيم للصفحات
+      function displayApps(appsToDisplay, page = 1) {
+        container.innerHTML = "";
+        
+        if (appsToDisplay.length === 0) {
+          container.innerHTML = '<div class="no-results">لا توجد تطبيقات مطابقة للبحث</div>';
+          pagination.innerHTML = '';
+          return;
+        }
+        
+        const startIndex = (page - 1) * appsPerPage;
+        const endIndex = startIndex + appsPerPage;
+        const paginatedApps = appsToDisplay.slice(startIndex, endIndex);
+        
+        paginatedApps.forEach(app => {
+          const card = document.createElement("div");
+          card.className = "app-card";
+
+          card.innerHTML = `
+            <img src="${app.image}" alt="${app.title}">
+            <h3>${app.title}</h3>
+            <div class="app-category">${app.category}</div>
+            <button onclick="window.location.href='${app.link}'">تنزيل</button>
+          `;
+
+          container.appendChild(card);
+        });
+
+        // إنشاء أزرار الترقيم
+        createPagination(appsToDisplay.length, page);
+      }
+
+      // إنشاء أزرار الترقيم
+      function createPagination(totalApps, currentPage) {
+        pagination.innerHTML = '';
+        const totalPages = Math.ceil(totalApps / appsPerPage);
+        
+        if (totalPages <= 1) return;
+        
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'pagination-container';
+        
+        // زر الصفحة السابقة
+        if (currentPage > 1) {
+          const prevButton = document.createElement('button');
+          prevButton.textContent = 'السابق';
+          prevButton.className = 'pagination-button';
+          prevButton.addEventListener('click', () => {
+            displayApps(filteredApps, currentPage - 1);
+          });
+          paginationContainer.appendChild(prevButton);
+        }
+        
+        // أزرار الصفحات
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement('button');
+          pageButton.textContent = i;
+          pageButton.className = `pagination-button ${i === currentPage ? 'active' : ''}`;
+          pageButton.addEventListener('click', () => {
+            displayApps(filteredApps, i);
+          });
+          paginationContainer.appendChild(pageButton);
+        }
+        
+        // زر الصفحة التالية
+        if (currentPage < totalPages) {
+          const nextButton = document.createElement('button');
+          nextButton.textContent = 'التالي';
+          nextButton.className = 'pagination-button';
+          nextButton.addEventListener('click', () => {
+            displayApps(filteredApps, currentPage + 1);
+          });
+          paginationContainer.appendChild(nextButton);
+        }
+        
+        pagination.appendChild(paginationContainer);
+      }
+
+      // بحث التطبيقات
+      let filteredApps = apps;
+      function searchApps() {
+        const searchTerm = searchInput.value.toLowerCase();
+        filteredApps = apps.filter(app => 
+          app.title.toLowerCase().includes(searchTerm) || 
+          app.category.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;
+        displayApps(filteredApps, currentPage);
+      }
+
+      // إضافة مستمع الأحداث للبحث التلقائي
+      searchInput.addEventListener("input", searchApps);
+
+      // عرض جميع التطبيقات عند تحميل الصفحة
+      displayApps(apps, currentPage);
+    });
+  </script>
+</body>
+</html>
