@@ -5,96 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مود ابك</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* CSS Message Toast Styles */
-    .toast {
-      visibility: hidden; /* تكون مخفية في البداية */
-      min-width: 250px; /* الحد الأدنى من العرض */
-      margin-left: -125px; /* نصف العرض */
-      background-color: #333; /* لون الخلفية */
-      color: #fff; /* لون النص */
-      text-align: center; /* محاذاة النص */
-      border-radius: 2px; /* زوايا مدورة */
-      padding: 16px; /* الحشوة الداخلية */
-      position: fixed; /* تثبيت في مكان محدد */
-      z-index: 1; /* فوق كل العناصر الأخرى */
-      left: 50%; /* التمركز أفقيًا */
-      bottom: 30px; /* المسافة من الأسفل */
-      font-size: 17px; /* حجم النص */
-      transition: visibility 0s, opacity 0.5s linear; /* تأثير الانتقال */
-      opacity: 0; /* الإخفاء التام */
-    }
-
-    .toast.show {
-      visibility: visible; /* تظهر عند الحاجة */
-      opacity: 1; /* تغيير الشفافية */
-    }
-
-    /* إضافة المزيد من التنسيقات حسب الحاجة */
-    .app-card {
-      border: 1px solid #ccc; /* حدود بسيطة */
-      border-radius: 8px; /* زوايا مدورة */
-      padding: 16px; /* حشوة داخلية */
-      margin: 10px; /* المسافة بين البطاقات */
-      text-align: center; /* محاذاة نص المركز */
-    }
-
-    .app-card img {
-      max-width: 100%; /* ضبط الصورة لتكون داخل البطاقة */
-      height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
-    }
-
-    /* تنسيق زر التحميل */
-    .app-card button {
-      margin-top: 10px; /* margem العلوي */
-      background-color: #007BFF; /* لون الخلفية الزر */
-      color: white; /* لون النص */
-      border: none; /* إزالة الحدود */
-      padding: 10px 15px; /* حشوة الزر */
-      border-radius: 5px; /* زوايا مدورة للزر */
-      cursor: pointer; /* تغيير شكل المؤشر */
-    }
-
-    .app-card button:hover {
-      background-color: #0056b3; /* تغيير اللون عند التمرير */
-    }
-
-    /* تنسيق حقل البحث */
-    .search-box {
-      margin-bottom: 20px; /* المسافة السفلية */
-    }
-
-    .search-box input {
-      width: 100%; /* عرض كامل للمدخل */
-      padding: 10px; /* حشوة */
-      border: 1px solid #ccc; /* حدود */
-      border-radius: 4px; /* زوايا مدورة */
-    }
-
-    .pagination {
-      margin-top: 20px; /* margim العلوي */
-      text-align: center; /* محاذاة نص المركز */
-    }
-
-    .pagination-button {
-      margin: 0 5px; /* margim الأفقي */
-      padding: 10px 15px; /* حشوة الزر */
-      border: 1px solid #007BFF; /* حدود الزر */
-      border-radius: 5px; /* زوايا مدورة */
-      background-color: white; /* لون الخلفية */
-      cursor: pointer; /* تغيير شكل المؤشر */
-    }
-
-    .pagination-button:hover {
-      background-color: #007BFF; /* تغيير اللون عند التمرير */
-      color: white; /* تغيير لون النص */
-    }
-
-    .pagination-button.active {
-      background-color: #007BFF; /* لون الزر النشط */
-      color: white; /* تغيير لون النص النشط */
-    }
-  </style>
 </head>
 <body>
 
@@ -118,14 +28,12 @@
     </div>
   </div>
 
-  <div id="toast" class="toast">جار التحميل...</div>
-
   <script>
     // بيانات التطبيقات
     const apps = [
       {
         title: "واتساب مود",
-        image: "https://via.placeholder.com/100/4CAF50/FFFFFF?text=WA",
+        image: "https://i.postimg.cc/jqFq4CbZ/icon-13.png",
         link: "https://dl.dropboxusercontent.com/scl/fi/gc2qhjabpfp5ovvgw42nm/Muviz-Edge_2.0.1.0.apk?rlkey=2t5uz544xidtsgax1y7y19h1i",
         category: "تواصل اجتماعي"
       },
@@ -240,7 +148,7 @@
             <img src="${app.image}" alt="${app.title}">
             <h3>${app.title}</h3>
             <div class="app-category">${app.category}</div>
-            <button onclick="showToast(); window.location.href='${app.link}'">تنزيل</button>
+            <button onclick="window.location.href='${app.link}'">تنزيل</button>
           `;
 
           container.appendChild(card);
@@ -306,13 +214,6 @@
         );
         currentPage = 1;
         displayApps(filteredApps, currentPage);
-      }
-
-      // إظهار رسالة التوست
-      function showToast() {
-        const toast = document.getElementById("toast");
-        toast.className = "toast show"; // إضافة الفئة لعرض الرسالة
-        setTimeout(() => { toast.className = "toast"; }, 3000); // إخفائها بعد 3 ثواني
       }
 
       // إضافة مستمع الأحداث للبحث التلقائي
