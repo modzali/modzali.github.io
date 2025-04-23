@@ -1,198 +1,102 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مود ابك</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    /* إضافة أنماط Toast */
+    /* CSS Message Toast Styles */
     .toast {
-      visibility: hidden;
-      min-width: 250px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 4px;
-      padding: 16px;
-      position: fixed;
-      z-index: 1000;
-      right: 50%;
-      bottom: 30px;
-      transform: translateX(50%);
-      font-size: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      opacity: 0;
-      transition: opacity 0.3s, visibility 0.3s;
+      visibility: hidden; /* تكون مخفية في البداية */
+      min-width: 250px; /* الحد الأدنى من العرض */
+      margin-left: -125px; /* نصف العرض */
+      background-color: #333; /* لون الخلفية */
+      color: #fff; /* لون النص */
+      text-align: center; /* محاذاة النص */
+      border-radius: 2px; /* زوايا مدورة */
+      padding: 16px; /* الحشوة الداخلية */
+      position: fixed; /* تثبيت في مكان محدد */
+      z-index: 1; /* فوق كل العناصر الأخرى */
+      left: 50%; /* التمركز أفقيًا */
+      bottom: 30px; /* المسافة من الأسفل */
+      font-size: 17px; /* حجم النص */
+      transition: visibility 0s, opacity 0.5s linear; /* تأثير الانتقال */
+      opacity: 0; /* الإخفاء التام */
     }
-    
+
     .toast.show {
-      visibility: visible;
-      opacity: 1;
+      visibility: visible; /* تظهر عند الحاجة */
+      opacity: 1; /* تغيير الشفافية */
     }
-    
-    .toast.success {
-      background-color: #4CAF50;
-    }
-    
-    .toast.error {
-      background-color: #f44336;
-    }
-    
-    .toast.warning {
-      background-color: #ff9800;
-    }
-    
-    .toast.info {
-      background-color: #2196F3;
-    }
-    
-    /* تحسينات أخرى للواجهة */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f5f5;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 15px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    
-    .search-box {
-      margin: 20px 0;
-      text-align: center;
-    }
-    
-    .search-box input {
-      width: 100%;
-      max-width: 500px;
-      padding: 12px 20px;
-      border: 1px solid #ddd;
-      border-radius: 30px;
-      font-size: 16px;
-      outline: none;
-      transition: border 0.3s;
-    }
-    
-    .search-box input:focus {
-      border-color: #2c3e50;
-    }
-    
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    
+
+    /* إضافة المزيد من التنسيقات حسب الحاجة */
     .app-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-      padding: 20px;
+      border: 1px solid #ccc; /* حدود بسيطة */
+      border-radius: 8px; /* زوايا مدورة */
+      padding: 16px; /* حشوة داخلية */
+      margin: 10px; /* المسافة بين البطاقات */
+      text-align: center; /* محاذاة نص المركز */
     }
-    
-    .app-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-    
+
     .app-card img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 15px;
+      max-width: 100%; /* ضبط الصورة لتكون داخل البطاقة */
+      height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
     }
-    
-    .app-card h3 {
-      margin: 10px 0;
-      color: #333;
-      font-size: 16px;
-    }
-    
-    .app-category {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-    
+
+    /* تنسيق زر التحميل */
     .app-card button {
-      background-color: #2c3e50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s;
-      width: 100%;
+      margin-top: 10px; /* margem العلوي */
+      background-color: #007BFF; /* لون الخلفية الزر */
+      color: white; /* لون النص */
+      border: none; /* إزالة الحدود */
+      padding: 10px 15px; /* حشوة الزر */
+      border-radius: 5px; /* زوايا مدورة للزر */
+      cursor: pointer; /* تغيير شكل المؤشر */
     }
-    
+
     .app-card button:hover {
-      background-color: #1a252f;
+      background-color: #0056b3; /* تغيير اللون عند التمرير */
     }
-    
+
+    /* تنسيق حقل البحث */
+    .search-box {
+      margin-bottom: 20px; /* المسافة السفلية */
+    }
+
+    .search-box input {
+      width: 100%; /* عرض كامل للمدخل */
+      padding: 10px; /* حشوة */
+      border: 1px solid #ccc; /* حدود */
+      border-radius: 4px; /* زوايا مدورة */
+    }
+
     .pagination {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
+      margin-top: 20px; /* margim العلوي */
+      text-align: center; /* محاذاة نص المركز */
     }
-    
-    .pagination-container {
-      display: flex;
-      gap: 5px;
-    }
-    
+
     .pagination-button {
-      padding: 8px 16px;
-      border: 1px solid #ddd;
-      background-color: white;
-      color: #333;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.3s;
+      margin: 0 5px; /* margim الأفقي */
+      padding: 10px 15px; /* حشوة الزر */
+      border: 1px solid #007BFF; /* حدود الزر */
+      border-radius: 5px; /* زوايا مدورة */
+      background-color: white; /* لون الخلفية */
+      cursor: pointer; /* تغيير شكل المؤشر */
     }
-    
+
     .pagination-button:hover {
-      background-color: #f1f1f1;
+      background-color: #007BFF; /* تغيير اللون عند التمرير */
+      color: white; /* تغيير لون النص */
     }
-    
+
     .pagination-button.active {
-      background-color: #2c3e50;
-      color: white;
-      border-color: #2c3e50;
-    }
-    
-    .no-results {
-      text-align: center;
-      grid-column: 1 / -1;
-      color: #666;
-      padding: 40px 0;
-      font-size: 18px;
+      background-color: #007BFF; /* لون الزر النشط */
+      color: white; /* تغيير لون النص النشط */
     }
   </style>
 </head>
 <body>
-
-  <!-- إضافة عنصر Toast -->
-  <div id="toast" class="toast"></div>
 
   <header>
     <div class="container">
@@ -213,6 +117,8 @@
       <!-- أزرار الترقيم الصفحات تظهر هنا -->
     </div>
   </div>
+
+  <div id="toast" class="toast">جار التحميل...</div>
 
   <script>
     // بيانات التطبيقات
@@ -303,32 +209,6 @@
       }
     ];
 
-    // دالة لعرض Toast
-    function showToast(message, type = 'info', duration = 3000) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.className = 'toast show ' + type;
-      
-      setTimeout(() => {
-        toast.className = toast.className.replace('show', '');
-      }, duration);
-    }
-
-    // دالة لمعالجة التحميل
-    function handleDownload(link, title) {
-      showToast(`جارٍ تحميل ${title}... الرجاء الانتظار`, 'info', 2000);
-      
-      // هنا يمكنك إضافة منطق التحميل الفعلي
-      setTimeout(() => {
-        if (link !== '#') {
-          window.open(link, '_blank');
-          showToast(`تم بدء تحميل ${title} بنجاح`, 'success', 2000);
-        } else {
-          showToast(`رابط التحميل غير متوفر حالياً`, 'warning', 2000);
-        }
-      }, 1000);
-    }
-
     // انتظار تحميل DOM بالكامل
     document.addEventListener('DOMContentLoaded', function() {
       const container = document.getElementById("appContainer");
@@ -357,10 +237,10 @@
           card.className = "app-card";
 
           card.innerHTML = `
-            <img src="${app.image}" alt="${app.title}" loading="lazy">
+            <img src="${app.image}" alt="${app.title}">
             <h3>${app.title}</h3>
             <div class="app-category">${app.category}</div>
-            <button onclick="handleDownload('${app.link}', '${app.title}')">تنزيل</button>
+            <button onclick="showToast(); window.location.href='${app.link}'">تنزيل</button>
           `;
 
           container.appendChild(card);
@@ -426,6 +306,13 @@
         );
         currentPage = 1;
         displayApps(filteredApps, currentPage);
+      }
+
+      // إظهار رسالة التوست
+      function showToast() {
+        const toast = document.getElementById("toast");
+        toast.className = "toast show"; // إضافة الفئة لعرض الرسالة
+        setTimeout(() => { toast.className = "toast"; }, 3000); // إخفائها بعد 3 ثواني
       }
 
       // إضافة مستمع الأحداث للبحث التلقائي
