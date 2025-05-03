@@ -1,527 +1,343 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مود ابك</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      direction: rtl;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الموقع تحت الصيانة - سنعود قريباً">
+    <title>الموقع تحت الصيانة | سنعود قريباً</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #ef4444;
+            --text-color: #1f2937;
+            --light-text: #6b7280;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+        }
 
-    .ads-box {
-      text-align: center;
-      margin: 20px auto;
-      padding: 10px;
-      background-color: #f5f5f5;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      max-width: 480px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .app-card img {
-      max-width: 100%;
-    }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    .app-card h3 {
-      margin: 10px 0 5px;
-    }
-  </style>
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            max-width: 90%;
+            width: 600px;
+            position: relative;
+            z-index: 10;
+            margin: 2rem;
+            animation: fadeIn 1s ease-in-out;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .logo {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo img {
+            max-width: 120px;
+            height: auto;
+        }
+
+        .icon-container {
+            background-color: rgba(37, 99, 235, 0.1);
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem;
+        }
+
+        .icon {
+            font-size: 50px;
+            color: var(--primary-color);
+            animation: pulse 3s infinite;
+        }
+
+        h1 {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .telegram-btn:hover {
+            background-color: var(--secondary-color);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .telegram-btn i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            width: 75%;
+            animation: progress 2s ease;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes progress {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 75%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <header>
+    <div class="background"></div>
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
-      <div class="logo">MOD-APk</div>
-    </div>
-  </header>
+        <div class="logo">
+            <!-- يمكنك إضافة شعار هنا -->
+            <!-- <img src="logo.png" alt="شعار الموقع"> -->
+        </div>
+        
+        <div class="icon-container">
+            <i class="fas fa-tools icon"></i>
+        </div>
+        
+        <h1>الموقع تحت الصيانة</h1>
+        <h2>نعمل على تحسين تجربتك</h2>
+        
+        <p>نحن نقوم حاليًا بتحديث وتطوير الموقع لنقدم لك تجربة أفضل. نعتذر عن أي إزعاج وسنعود قريبًا بمزايا جديدة ومحسنة.</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <p>في هذه الأثناء، يمكنك تحميل التطبيقات من قناة التليجرام الرسمية:</p>
+        
+        <a href="https://t.me/Get_ModZ" class="telegram-btn" target="_blank">
+            <i class="fab fa-telegram-plane"></i>
+            الانتقال إلى قناة التليجرام
+        </a>
+        
 
-  <div class="container">
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="ابحث عن التطبيقات...">
-    </div>
 
-    <!-- وحدة إعلانية -->
-    <div class="ads-box">
-      <script type="text/javascript">
-        atOptions = {
-          'key': 'cf29623a64feb90de5b7d64fcf9a9ad8',
-          'format': 'iframe',
-          'height': 60,
-          'width': 468,
-          'params': {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/cf29623a64feb90de5b7d64fcf9a9ad8/invoke.js"></script>
-    </div>
-
-    <div class="app-grid" id="appContainer">
-      <!-- التطبيقات تظهر هنا -->
-    </div>
-
-    <div class="pagination" id="pagination">
-      <!-- أزرار الترقيم الصفحات تظهر هنا -->
-    </div>
-  </div>
-
-  <script>
-    // بيانات التطبيقات - مثال مبدئي
-const apps = [
-      {
-        title: "انستغرام",
-        image: "https://i.postimg.cc/Hn7XMCG5/icon-11.png",
-        link: "https://drive.google.com/uc?export=download&id=10aNSMz1yeMpf_UXufuM1zYALbwFd7XEm",
-        category: "تواصل اجتماعي"
-      },
-      {
-        title: "CapCut",
-        image: "https://i.postimg.cc/Qdjm2HGy/icon-6.png",
-        link: "https://www.mediafire.com/file/g5c13j2cdeoqig0/CapCut_14.1.0.apk/file",
-        category: "تصميم"
-      },
-      {
-        title: "سناب جات",
-        image: "https://i.postimg.cc/5NBpK8Gz/icon-5.png",
-        link: "",
-        category: "تواصل اجتماعي"
-      },
-      {
-        title: "تيك توك",
-        image: "https://i.postimg.cc/ZYd1Z70v/icon-19.png",
-        link: "https://www.mediafire.com/file/ncx5hm057fixlng/TikTok_39.5.5.apk/file",
-        category: "Tik tok"
-      },
-      {
-        title: "remini",
-        image: "https://i.postimg.cc/nLdJW0TS/icon-24.png",
-        link: "https://www.mediafire.com/file/lzsua5bttyybpwq/Remini_3.7.977.202513223.apk/file",
-        category: "تصميم"
-      },
-      {
-        title: "يوتيوب",
-        image: "https://i.postimg.cc/ZKgHRZgT/icon-20.png",
-        link: "https://www.mediafire.com/file/rh16d3m1fu8c0ke/YouTube_Premium_20.15.38%25282%2529.apk/file",
-        category: "مقاطع فيديو",
-      },
-      {
-        title: "تلجرام مود",
-        image: "https://i.postimg.cc/FKsPL1TL/icon-4.png",
-        link: "https://www.mediafire.com/file/isjbz5do6j2tz2n/%25D8%25AA%25D9%258A%25D9%2584%25D9%258A%25D8%25AC%25D8%25B1%25D8%25A7%25D9%2585_%25281%2529.apk/file",
-        category: "مراسلة"
-      },
-      
-      {
-        title: "نتفلكس",
-        image: "https://i.postimg.cc/5yGhSkJ0/Screenshot-2025-04-26-19-13-59-12-b5a5c5cb02ca09c784c5d88160e2ec24.jpg",
-        link: "https://www.mediafire.com/file/jq8i7u758779hi6/%25D9%2586%25D8%25AA%25D9%2581%25D9%2584%25D9%258A%25D9%2583%25D8%25B3_%25D8%25A8%25D8%25B1%25D9%258A%25D9%2585%25D9%258A%25D9%2588%25D9%2585.apk/file",
-        category: "سينما"
-      },
-      
-
-      
-      {
-        title: "EgyBest",
-        image: "https://i.postimg.cc/50d81m0N/icon-3.png",
-        link: "https://www.mediafire.com/file/c6szq5bsny2p1wb/EgyBest_9.0.apk/file",
-        category: "تصميم"
-      },
-      
-  {
-        title: "خط الفك",
-        image: "https://i.postimg.cc/W1zG73Cj/icon-6.png",
-        link: "https://www.mediafire.com/file/wgnr5ut8h68kjgq/%25D8%25AE%25D8%25B7_%25D8%25A7%25D9%2584%25D9%2581%25D9%2583_1.2.7.apk/file",
-        category: "تصميم"
-      },
-      
-     {
-        title: "StoryBit",
-        image: "https://i.postimg.cc/8zYhXGgv/icon-5.png",
-        link: "https://www.mediafire.com/file/l8fmjq10efsym2c/StoryBit_1.9.4.apk/file",
-        category: "تصميم"
-      },
-      
-      
-           {
-        title: "GreenTuber",
-        image: "https://i.postimg.cc/43hpr0XS/icon-4.png",
-        link: "https://www.mediafire.com/file/lb3jd94o2pony0z/GreenTuber_0.1.8.5.apk/file",
-        category: "تصميم"
-      },
-      
-      
-      
-      
-      {
-        title: "picsart",
-        image: "https://i.postimg.cc/HW765q9B/icon-8.png",
-        link: "https://www.mediafire.com/file/yaaqmd8amitg9xc/Picsart_28.9.7.apk/file",
-        category: "تصميم"
-      },
-      {
-        title: "chaton",
-        image: "https://i.postimg.cc/bdcbHF85/icon-13.png",
-        link: "https://www.mediafire.com/file/9xshc4ynm5ea10i/ChatOn_1.69.593-630.apk/file",
-        category: "ذكاء اصطناعي"
-      },
-      {
-        title: "تروكولر",
-        image: "https://i.postimg.cc/SRyHNqnS/icon-21.png",
-        link: "https://www.mediafire.com/file/46yjpruy8xie9a8/%25D8%25AA%25D8%25B1%25D9%2588%25D9%2583%25D9%2588%25D9%2584%25D8%25B1_15.38.0.apk/file",
-        category: "اتصال"
-      },
-      {
-        title: "zedge",
-        image: "https://i.postimg.cc/TYcnBbM5/icon-23.png",
-        link: "https://www.mediafire.com/file/hvf7dwrnc0sesv5/Zedge_8.72.3%25282%2529.apk/file",
-        category: "خلفيات شاشة"
-      },
-      {
-        title: "reface",
-        image: "https://i.postimg.cc/wv10wZ8x/icon-9.png",
-        link: "https://www.mediafire.com/file/1vcohxxorvd02fn/Reface_5.12.0.apk/file",
-        category: "تصميم"
-      },
-      {
-        title: "Wallcraft",
-        image: "https://i.postimg.cc/h41rR6VG/icon-25.png",
-        link: "https://www.mediafire.com/file/i743sz4qspq4sbv/Wallcraft_3.53.0%25282%2529.apk/file",
-        category: "خلفيات شاشة"
-      },
-      
-            {
-        title: "EWA",
-        image: "https://i.postimg.cc/Prs2MS6h/icon-7.png",
-        link: "https://www.mediafire.com/file/aog7e9qyvxfmbuq/EWA_10.52.0.apk/file",
-        category: "تعليم"
-      },
-      
-      
-                  {
-        title: "تمارين منزلية",
-        image: "https://i.postimg.cc/cHPT2h0R/icon-3.png",
-        link: "https://www.mediafire.com/file/ual7n4y04zje03m/%25D8%25AA%25D9%2585%25D8%25A7%25D8%25B1%25D9%258A%25D9%2586_%25D9%2585%25D9%2586%25D8%25B2%25D9%2584%25D9%258A%25D8%25A9_1.2.2.apk/file",
-        category: "أدوات"
-      },
-      
-      
-                  {
-        title: "NeonArt",
-        image: "https://i.postimg.cc/sft0Njgk/icon-15.png",
-        link: "https://www.mediafire.com/file/fwg0w5rsm9pvjta/NeonArt_7.1.0.apk/file",
-        category: "تصميم"
-      },
-      
-                  {
-        title: "Muviz Edge",
-        image: "https://i.postimg.cc/P5HVdSZK/icon-17.png",
-        link: "https://www.mediafire.com/file/mycjnhib7ghargu/Muviz_Edge_2.0.1.0.apk/file",
-        category: "أدوات"
-      },
-      
-      
-      
-      
-              {
-        title: "Backdrops",
-        image: "https://i.postimg.cc/4xJTSt60/icon-27.png",
-        link: "https://www.mediafire.com/file/ch5w2v2cq5g1n9o/Backdrops_5.2.apk/file",
-        category: "أدوات"
-      },
-      
-             {
-        title: "Creart",
-        image: "https://i.postimg.cc/k4SZ4XN8/icon-28.png",
-        link: "https://www.mediafire.com/file/909f3zh1antj8xy/CreArt_2.5.5.apk/file",
-        category: "ذكاء اصطناعي"
-      },
-      
-                   {
-        title: "Future Self Face Aging Changer",
-        image: "https://i.postimg.cc/G3B5K8dP/icon-14.png",
-        link: "https://www.mediafire.com/file/2qurr8smtxoyj8p/Future_Self_Face_Aging_Changer_1.0.4.1_25022025%25282%2529.apk/file",
-        category: "أدوات"
-      },
-      
-        {
-        title: "مايكرو",
-        image: "https://i.postimg.cc/0r1JsZkD/icon-30.png",
-        link: "https://www.mediafire.com/file/uu31zoklbjauvdh/%25D9%2585%25D8%25A7%25D9%258A%25D9%2583%25D8%25B1%25D9%2588_0.3.1.4.240913.apk/file",
-        category: "ادوات"
-      },
-      
-      
-         {
-        title: "game boster vip",
-        image: "https://i.postimg.cc/B6bxqKMm/icon-12.png",
-        link: "https://www.mediafire.com/file/lt02ic49nukor8f/%25D9%2584%25D8%25B9%25D8%25A8%25D8%25A9_%25D8%25A7%25D9%2584%25D8%25AF%25D8%25A7%25D8%25B9%25D9%2585_80.apk/file",
-        category: "أدوات"
-      },
-      
-      
-      {
-        title: "مباريات مباشرة",
-        image: "https://i.postimg.cc/SQ3PjwJf/icon-22.png",
-        link: "https://www.mediafire.com/file/we3lmr26we7t23p/%25D9%2585%25D8%25A8%25D8%25A7%25D8%25B1%25D9%258A%25D8%25A7%25D8%25AA_%25D9%2585%25D8%25A8%25D8%25A7%25D8%25B4%25D8%25B1%25D8%25A9_3.1.apk/file",
-        category: "sport"
-      },
-      
-      {
-        title: "MovieBox",
-        image: "https://i.postimg.cc/wj23fLrf/icon-32.png",
-        link: "https://www.mediafire.com/file/22ovx46ln6rcnac/MovieBox_3.0.01.0411.03%25282%2529.apk/file",
-        category: "سينما"
-      },
-      
-            {
-        title: "ToonArt",
-        image: "https://i.postimg.cc/28ngFSB5/icon-10.png",
-        link: "https://www.mediafire.com/file/luvx76h6mmtcukv/ToonArt_2.0.4.0.apk/file",
-        category: "تصميم"
-      },
-      
-      
-            {
-        title: "Lark Player",
-        image: "https://i.postimg.cc/XJTDdRjF/icon-9.png",
-        link: "https://www.mediafire.com/file/5zaojm4fy2ozrzk/Lark_Player_6.17.5%25282%2529.apk/file",
-        category: "ادوات"
-      },
-      
-      
-      
-            {
-        title: "MateAI",
-        image: "https://i.postimg.cc/HkHRS1Q9/icon-3.png",
-        link: "https://www.mediafire.com/file/v2wu7yi50d8pof1/MateAI_1.3.7%25282%2529.apk/file",
-        category: "ذكاء اصطناعي"
-      },
-      
-      
-      
-      
-            {
-        title: "Avast Mobile Security",
-        image: "https://i.postimg.cc/K8NVwpfS/icon-6.png",
-        link: "https://www.mediafire.com/file/pf8c4qmzpa2tbyp/Avast_Mobile_Security_25.5.0.apk/file",
-        category: "ادوات"
-      },
-      
-      
-            {
-        title: "AloHTML Editor",
-        image: "https://i.postimg.cc/J0kvF16P/icon-11.png",
-        link: "https://www.mediafire.com/file/zluq8g5tuu5tm9g/AloHTML_Editor_3.0.2_%255BNairobi%255D.apk/file",
-        category: "ادوات"
-      },
-      
-      
-            {
-        title: "Home Workout Fitzeee",
-        image: "https://i.postimg.cc/yNpGYJ2L/icon-7.png",
-        link: "https://www.mediafire.com/file/klvcdt0y69ncz5b/Home_Workout_Fitzeee_10.8.apk/file",
-        category: "تمارين"
-      },
-      
-      
-    {
-        title: "PhotoBoost",
-        image: "https://i.postimg.cc/FRj0C8b0/icon.png",
-        link: "https://www.mediafire.com/file/ywmqwe25gnhxa3r/PhotoBoost_1.1.24.apk/file",
-        category: "تصميم"
-      },
-      
-      
-      
-      {
-        title: "DeepSeek",
-        image: "https://i.postimg.cc/rmdPdVkM/icon-8.png",
-        link: "https://www.mediafire.com/file/wdde546z2vixapg/DeepSeek_1.1.5.apk/file",
-        category: "ذكاء اصطناعي"
-      },
-      
-      
-      
-      {
-        title: "تطبيق إنقاص الوزن للرجال",
-        image: "https://i.postimg.cc/RFqmVxhz/icon-1.png",
-        link: "https://www.mediafire.com/file/z8mm17m3g03wri4/%25D8%25AA%25D8%25B7%25D8%25A8%25D9%258A%25D9%2582_%25D8%25A5%25D9%2586%25D9%2582%25D8%25A7%25D8%25B5_%25D8%25A7%25D9%2584%25D9%2588%25D8%25B2%25D9%2586_%25D9%2584%25D9%2584%25D8%25B1%25D8%25AC%25D8%25A7%25D9%2584_2.3.3.apk/file",
-        category: "تمارين"
-      },
-      
-      
-      
-      {
-        title: "Matrix لايف للجدران",
-        image: "https://i.postimg.cc/1z3TQ07g/icon-5.png",
-        link: "https://www.mediafire.com/file/8u2sul5ebobp88p/Matrix_%25D9%2584%25D8%25A7%25D9%258A%25D9%2581_%25D9%2584%25D9%2584%25D8%25AC%25D8%25AF%25D8%25B1%25D8%25A7%25D9%2586_1.6.12.apk/file",
-        category: "خلفيات شاشة"
-      },
-      
-      
-      
-    {
-        title: "مستكشف ملفات RS",
-        image: "https://i.postimg.cc/vTFGPS8F/icon.png",
-        link: "https://www.mediafire.com/file/f4ufj0y39bl8a18/%25D9%2585%25D8%25B3%25D8%25AA%25D9%2583%25D8%25B4%25D9%2581_%25D9%2585%25D9%2584%25D9%2581%25D8%25A7%25D8%25AA_RS_2.1.9.apk/file",
-        category: "ادوات"
-      },
-      
-      
-      {
-        title: "Flexcil",
-        image: "https://i.postimg.cc/1zhM3GzR/icon.png",
-        link: "https://www.mediafire.com/file/xjpyrlo0x4a7m3e/Flexcil_1.3.2.5.apk/file",
-        category: "اداوت"
-      },
-      
-      {
-        title: "Beelinguapp",
-        image: "https://i.postimg.cc/8zDqzfzS/icon.png",
-        link: "https://www.mediafire.com/file/uuzbap5tcg198g6/Beelinguapp_3.216.apk/file",
-        category: "تعليم"
-      },
-      
-      {
-        title: "Launcher & Themes",
-        image: "https://i.postimg.cc/YSCZ1cFD/icon-1.png",
-        link: "https://www.mediafire.com/file/ek0n3nhc6b2rvsb/Launcher_%2526_Themes_1.3.12.apk/file",
-        category: "اداوت"
-      },
-      
-      {
-        title: "تلفزيون",
-        image: "https://i.postimg.cc/wjVnyx1s/icon-2.png",
-        link: "https://www.mediafire.com/file/jdsgje5kkzuik7u/%25D8%25AA%25D9%2584%25D9%2581%25D8%25B2%25D9%258A%25D9%2588%25D9%2586_99.99.99.apk/file",
-        category: "اداوت"
-      },
-      
-      
-
-      
-      
-      {
-        title: "Flexcil",
-        image: "https://i.postimg.cc/1zhM3GzR/icon.png",
-        link: "https://www.mediafire.com/file/xjpyrlo0x4a7m3e/Flexcil_1.3.2.5.apk/file",
-        category: "اداوت"
-      },
-      
-      {
-        title: "365Scores",
-        image: "https://i.postimg.cc/5tgt9FdY/icon-15.png",
-        link: "https://www.mediafire.com/file/xork9n8bjb38pb5/365Scores.apk/file",
-        category: "sport"
-      },
-      
-      
-      
-      
-      
-      {
-        title: "snaptube",
-        image: "https://i.postimg.cc/zXdFVhtZ/icon-26.png",
-        link: "https://www.mediafire.com/file/0v50t5mio3lrbwt/SnapTube_7.50.0.98950810.apk/file",
-        category: "أدوات"
-      }
-    ];
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const container = document.getElementById("appContainer");
-      const searchInput = document.getElementById("searchInput");
-      const pagination = document.getElementById("pagination");
-
-      let currentPage = 1;
-      const appsPerPage = 10;
-
-      function displayApps(appsToDisplay, page = 1) {
-        container.innerHTML = "";
-
-        if (appsToDisplay.length === 0) {
-          container.innerHTML = '<div class="no-results">لا توجد تطبيقات مطابقة للبحث</div>';
-          pagination.innerHTML = '';
-          return;
+    <script>
+        // إنشاء تأثير الجسيمات
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // ضبط موقع وحجم عشوائي لكل جسيم
+                const size = Math.floor(Math.random() * 6) + 3;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const opacity = Math.random() * 0.5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.opacity = opacity;
+                
+                // إضافة حركة للجسيم
+                const duration = Math.random() * 20 + 10;
+                particle.style.animation = `float ${duration}s linear infinite`;
+                
+                // إنشاء animation للحركة
+                const keyframes = `
+                    @keyframes float {
+                        0% {
+                            transform: translate(0, 0);
+                        }
+                        25% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                        }
+                        50% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                        }
+                        75% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                        }
+                        100% {
+                            transform: translate(0, 0);
+                        }
+                    }
+                `;
+                
+                const style = document.createElement('style');
+                style.innerHTML = keyframes;
+                document.head.appendChild(style);
+                
+                particlesContainer.appendChild(particle);
+            }
         }
-
-        const startIndex = (page - 1) * appsPerPage;
-        const endIndex = startIndex + appsPerPage;
-        const paginatedApps = appsToDisplay.slice(startIndex, endIndex);
-
-        paginatedApps.forEach(app => {
-          const card = document.createElement("div");
-          card.className = "app-card";
-
-          card.innerHTML = `
-            <img src="${app.image}" alt="${app.title}">
-            <h3>${app.title}</h3>
-            <div class="app-category">${app.category}</div>
-            <button onclick="window.location.href='${app.link}'">تنزيل</button>
-          `;
-
-          container.appendChild(card);
-        });
-
-        createPagination(appsToDisplay.length, page);
-      }
-
-      function createPagination(totalApps, currentPage) {
-        pagination.innerHTML = '';
-        const totalPages = Math.ceil(totalApps / appsPerPage);
-
-        if (totalPages <= 1) return;
-
-        const paginationContainer = document.createElement('div');
-        paginationContainer.className = 'pagination-container';
-
-        if (currentPage > 1) {
-          const prevButton = document.createElement('button');
-          prevButton.textContent = 'السابق';
-          prevButton.className = 'pagination-button';
-          prevButton.addEventListener('click', () => {
-            displayApps(filteredApps, currentPage - 1);
-          });
-          paginationContainer.appendChild(prevButton);
-        }
-
-        for (let i = 1; i <= totalPages; i++) {
-          const pageButton = document.createElement('button');
-          pageButton.textContent = i;
-          pageButton.className = `pagination-button ${i === currentPage ? 'active' : ''}`;
-          pageButton.addEventListener('click', () => {
-            displayApps(filteredApps, i);
-          });
-          paginationContainer.appendChild(pageButton);
-        }
-
-        if (currentPage < totalPages) {
-          const nextButton = document.createElement('button');
-          nextButton.textContent = 'التالي';
-          nextButton.className = 'pagination-button';
-          nextButton.addEventListener('click', () => {
-            displayApps(filteredApps, currentPage + 1);
-          });
-          paginationContainer.appendChild(nextButton);
-        }
-
-        pagination.appendChild(paginationContainer);
-      }
-
-      let filteredApps = apps;
-      function searchApps() {
-        const searchTerm = searchInput.value.toLowerCase();
-        filteredApps = apps.filter(app =>
-          app.title.toLowerCase().includes(searchTerm) ||
-          app.category.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;
-        displayApps(filteredApps, currentPage);
-      }
-
-      searchInput.addEventListener("input", searchApps);
-
-      displayApps(apps, currentPage);
-    });
-  </script>
+        
+        // تنفيذ الدالة عند تحميل الصفحة
+        window.addEventListener('load', createParticles);
+    </script>
 </body>
 </html>
